@@ -258,7 +258,7 @@ module.exports = new EntitySchema({
 
 ## Services
 
-### Database Services
+## Database Services
 
 - Call **createConnection** function on **typeorm**.
 - Export the connection function.
@@ -308,4 +308,156 @@ const find = async (data) => {
   return await diagnosisRepository.find({ where: { id: data.id } });
 };
 ```
+
+### Update Service
+
+```js
+const update = async (data) => {
+  delete data["traceId"];
+  let connection = await databaseConnection.createConnection();
+  return await connection
+    .createQueryBuilder()
+    .update(Diagnosis)
+    .set(data)
+    .where("id = :id", { id: data.id })
+    .execute();
+};
+```
+
+### Delete/Destroy Service
+
+```javascript
+const destroy = async (enityId) => {
+  let connection = await databaseConnection.createConnection();
+  return await connection
+    .createQueryBuilder()
+    .delete()
+    .from(Diagnosis)
+    .where("id = :id", { id: enityId })
+    .execute();
+};
+```
+
+
+### Search Service
+
+```js
+const search = async (data) => { 
+  let criteria =data.criteria
+  let connection = await databaseConnection.createConnection();
+  let diagnosisRepository = connection.getRepository("Diagnosis");
+  return await diagnosisRepository.createQueryBuilder()
+  .select()
+  .where('name ILIKE :criteria', {criteria: `%${criteria}%`})
+  .getMany(); 
+};
+```
+
+## PatientDiagnosisServices
+
+**src/services/PatientDiagnosisService.js**
+
+### async function to create
+
+```javascript
+const create = async (data) => {
+  let connection = await databaseConnection.createConnection();
+  return await connection
+    .createQueryBuilder()
+    .insert()
+    .into(Diagnosis)
+    .values(data)
+    .execute();
+};
+```
+
+### async function for find
+
+```javascript
+const find = async (data) => {
+  let connection = await databaseConnection.createConnection();
+  let diagnosisRepository = connection.getRepository("Diagnosis");
+  return await diagnosisRepository.find({ where: { id: data.id } });
+};
+```
+
+### async function for update
+
+```js
+const update = async (data) => {
+  delete data["traceId"];
+  let connection = await databaseConnection.createConnection();
+  return await connection
+    .createQueryBuilder()
+    .update(Diagnosis)
+    .set(data)
+    .where("id = :id", { id: data.id })
+    .execute();
+};
+```
+
+### async function to delete a diagnosis
+
+```javascript
+const destroy = async (enityId) => {
+  let connection = await databaseConnection.createConnection();
+  return await connection
+    .createQueryBuilder()
+    .delete()
+    .from(Diagnosis)
+    .where("id = :id", { id: enityId })
+    .execute();
+}; 
+```
+
+## Diagnosis
+
+**src/Diagnosis.js**
+
+```js
+const {MicraService} = require("micra");
+const DiagnosisController = require('./controllers/DiagnosisController');
+const PatientDiagnosisController = require('./controllers/PatientDiagnosisController');
+
+class Diagnosis extends MicraService {
+    constructor() {
+        super()
+    }
+    registerActions() {
+        //Diagnosis service
+        this.registerAction("diagnosis/find", DiagnosisController.find);
+        this.registerAction("diagnosis/create", DiagnosisController.create);
+        this.registerAction("diagnosis/update", DiagnosisController.update);
+        this.registerAction("diagnosis/destroy", DiagnosisController.destroy);
+        this.registerAction("diagnosis/search", DiagnosisController.search);
+
+        //Patient Diagnosis service
+        this.registerAction("patientDiagnosis/find", PatientDiagnosisController.find);
+        this.registerAction("patientDiagnosis/create", PatientDiagnosisController.create);
+        this.registerAction("patientDiagnosis/update", PatientDiagnosisController.update);
+        this.registerAction("patientDiagnosis/destroy", PatientDiagnosisController.destroy);
+    }
+    registerEvents() {}
+    getName() {
+        return "DiagnosisService";
+    }
+}
+module.exports = Diagnosis;
+```
+
+## Micra Yaml File
+
+**micra.yml**
+
+```yml
+```javascript
+name: DiagnosisMicroservices
+enableTracing: true
+services:
+  - name: DiagnosisService
+    classFile: src/Diagnosis.js
+    local:
+      port: 3000
+```
+
 
