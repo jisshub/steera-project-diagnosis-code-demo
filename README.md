@@ -140,7 +140,7 @@ module.exports.find = async (micraMessage) => {
 
 ### async function for update.
 
-- Call update function on patient diagnosis service.
+- Call **update** function on patient diagnosis service.
 - Pass payload data to update function.
 
 ```js
