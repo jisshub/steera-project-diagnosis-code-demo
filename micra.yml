@@ -1,0 +1,11 @@
+name: DiagnosisMicroservices
+enableTracing: true
+services:
+  - name: DiagnosisService
+    classFile: src/Diagnosis.js
+    local:
+      port: 3000
+#  - name: PatientDiagnosisService
+#    classFile: src/controllers/PatientDiagnosisController.js
+#    local:
+#      port:3002
