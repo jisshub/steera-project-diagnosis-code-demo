@@ -1,3 +1,6 @@
+
+# Diagnosis Microservice
+
 # Steera Project Code Latest
 
 ## Diagnosis Controller - CRUD operations
@@ -23,7 +26,7 @@ module.exports.create = async (micraMessage) => {
 }
 ```
 
-### Find diagnosis async function 
+### async function to find diagnosis 
 
 - Call find method on diagnosis service.
 - Pass payload to find.
@@ -42,7 +45,7 @@ module.exports.find = async (micraMessage) => {
 }
 ```
 
-### Update diagnosis async funntion
+### async funntion to update diagnosis
 
 - Call **udpate** method on diagnosis service.
 - Pass payload to udpate function.
@@ -64,7 +67,7 @@ module.exports.update = async (micraMessage) => {
 
 
 
-### Delete/Destroy diagnosis async function.
+### async function for Delete/Destroy diagnosis .
 
 - Call **destroy** method on the diagnosis service.
 - Pass payload id to the destroy function.
@@ -84,7 +87,7 @@ module.exports.destroy = async (micraMessage) => {
 }
 ```
 
-### Search for diagnosis async function
+### async function to Search diagnosis.
 
 - Call **search** method on the diagnosis method.
 - Pass payload to search function.
@@ -459,5 +462,14 @@ services:
     local:
       port: 3000
 ```
+
+## Steps to run this project:
+
+1. Run `npm i` command.
+2. Install `postgresql` locally.
+3. run the script `postgres_dev_copy.sql` in scripts folder using the command `psql -u postgres --set ON_ERROR_STOP=on -f <scriptfile>`.
+4. Setup database settings inside config/db.js file. use database `gessit`.
+5. Run `micra local` command.
+
 
 
