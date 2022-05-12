@@ -1,5 +1,6 @@
 [Steera Project Code Latest](#steera-project-code-latest)
 
+[Steps to run this project](#Steps-to-run-this-project)
 
 # Diagnosis Microservice
 
@@ -465,7 +466,7 @@ services:
       port: 3000
 ```
 
-## Steps to run this project:
+# Steps to run this project
 
 1. Run `npm i` command.
 2. Install `postgresql` locally.
