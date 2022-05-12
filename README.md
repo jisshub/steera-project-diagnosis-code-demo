@@ -1,3 +1,5 @@
+[Steera Project Code Latest](#steera-project-code-latest)
+
 
 # Diagnosis Microservice
 
@@ -45,7 +47,7 @@ module.exports.find = async (micraMessage) => {
 }
 ```
 
-### async funntion to update diagnosis
+### async function to update diagnosis
 
 - Call **udpate** method on diagnosis service.
 - Pass payload to udpate function.
@@ -259,7 +261,7 @@ module.exports = new EntitySchema({
 });
 ```
 
-## Services
+# Services
 
 ## Database Services
 
