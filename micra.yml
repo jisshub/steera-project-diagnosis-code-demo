@@ -5,6 +5,10 @@ services:
     classFile: src/Diagnosis.js
     local:
       port: 3000
+  - name: LuDrugInteractionService
+    classFile: src/LuDrugInteractions.js
+    local:
+      port: 3002
 #  - name: PatientDiagnosisService
 #    classFile: src/controllers/PatientDiagnosisController.js
 #    local:
