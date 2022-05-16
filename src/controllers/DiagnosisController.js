@@ -32,7 +32,7 @@ module.exports.update = async (micraMessage) => {
   try {
     const data = await diagnosisService.update(payload);
     console.log(data)
-    return data;
+    return data;``
   } catch (error) {
     logger.error({error: error.message, code: 500, "message": "Failed to update diagnosis"})
     throw error
