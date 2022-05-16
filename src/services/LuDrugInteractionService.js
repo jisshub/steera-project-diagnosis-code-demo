@@ -43,9 +43,21 @@ const destroy = async (enityId) => {
         .execute();
 };
 
+const search = async (data) => {
+    let criteria = data.criteria;
+    let connection = await databaseConnection.createConnection();
+    let drugInteractionsRepository = connection.getRepository("LuDrugInteractions");
+    return await drugInteractionsRepository.createQueryBuilder()
+    .select()
+    .where('name ILIKE :criteria', 
+    {criteria: `%${criteria}%`})
+    .getMany();
+}
+
 module.exports = {
     create,
     find,
     update,
-    destroy
+    destroy,
+    search
 }
